@@ -6,6 +6,7 @@ import { Dashboard } from "./Components/Dashboard";
 import { About } from "./Components/About";
 import { Booktable } from "./Components/Booktable";
 import { Dishes } from "./Components/Dishes";
+import BookingSuccess from "./Components/Bookingsuccessfull";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/book-table" element={<Booktable />} />
         <Route path="/dishes" element={<Dishes />} />
+        <Route path="/bookingsuccess" element={<BookingSuccess />} />
       </Routes>
     </BrowserRouter>
   );

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { DatePicker, TimePicker, message, notification } from "antd";
+import type { GetProps } from 'antd';
 import dayjs, { Dayjs } from "dayjs";
+
+type RangePickerProps = GetProps<typeof DatePicker.RangePicker>;
 
 export const Booktable: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,7 +15,7 @@ export const Booktable: React.FC = () => {
   const [guestPhone, setGuestPhone] = useState("");
   const [specialRequest, setSpecialRequest] = useState("");
   const [availableTables, setAvailableTables] = useState<number[]>([]);
-  const [selectedTable, setSelectedTable] = useState<number | null>(null);
+  const [selectedpeople, setSelectedPeople] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,8 +29,7 @@ export const Booktable: React.FC = () => {
   }, [navigate]);
 
   const fetchAvailableTables = async () => {
-    // Mock API call to fetch available tables
-    const tables = [1, 2, 3, 4, 5]; // Example table IDs
+    const tables = [1, 2, 3, 4, 5, 6]; // Example table IDs
     setAvailableTables(tables);
   };
 
@@ -37,7 +39,7 @@ export const Booktable: React.FC = () => {
     setGuestName("");
     setGuestPhone("");
     setSpecialRequest("");
-    setSelectedTable(null);
+    setSelectedPeople("");
   };
 
   const handleSubmit = async () => {
@@ -46,7 +48,7 @@ export const Booktable: React.FC = () => {
       !bookingTime ||
       !guestName ||
       !guestPhone ||
-      !selectedTable
+      !selectedpeople
     ) {
       notification.error({
         message: "Please fill in all fields.",
@@ -55,7 +57,7 @@ export const Booktable: React.FC = () => {
     }
 
     const bookingDetails = {
-      tableId: selectedTable,
+      tableId: selectedpeople,
       date: bookingDate.format("YYYY-MM-DD"),
       time: bookingTime.format("HH:mm"),
       guestName,
@@ -64,42 +66,33 @@ export const Booktable: React.FC = () => {
     };
 
     resetData();
+    navigate('/bookingsuccess', { state: bookingDetails });
 
-    // Mock API call to submit booking
     console.log("Booking details:", bookingDetails);
     notification.success({
       message: "Table booked successfully!",
     });
   };
 
+  const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+    return current && current < dayjs().startOf('day');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div
+    className="min-h-screen flex flex-col"
+    style={{
+      backgroundImage: "url('https://t3.ftcdn.net/jpg/07/54/93/70/360_F_754937013_Tvqma7ELVFvzdXAqJqzcxI90gpwIoD4l.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >  
       {isAuthenticated && <Navbar />}
       <div className="flex justify-center items-center mt-20 p-6">
         <div className="bg-white w-full max-w-lg p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 font-fancy">
             Book a Table
           </h2>
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Select Date
-            </label>
-            <DatePicker
-              className="w-full border border-gray-300 rounded-lg p-2"
-              value={bookingDate}
-              onChange={(date) => setBookingDate(date)}
-            />
-          </div>
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Select Time
-            </label>
-            <TimePicker
-              className="w-full border border-gray-300 rounded-lg p-2"
-              value={bookingTime}
-              onChange={(time) => setBookingTime(time)}
-            />
-          </div>
           <div className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Guest Name
@@ -116,12 +109,35 @@ export const Booktable: React.FC = () => {
               Phone Number
             </label>
             <input
-              type="text"
+              type="number"
+              maxLength={10}
               className="w-full border border-gray-300 rounded-lg p-2"
               value={guestPhone}
               onChange={(e) => setGuestPhone(e.target.value)}
             />
           </div>
+          <div className="mb-5">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Select Date
+            </label>
+            <DatePicker
+              disabledDate={disabledDate}
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={bookingDate}
+              onChange={(date) => setBookingDate(date)}
+            />
+          </div>
+          <div className="mb-5">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Select Time
+            </label>
+            <TimePicker
+              className="w-full border border-gray-300 rounded-lg p-2"
+              value={bookingTime}
+              onChange={(time) => setBookingTime(time)}
+            />
+          </div>
+
           <div className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Special Requests
@@ -135,22 +151,16 @@ export const Booktable: React.FC = () => {
           </div>
           <div className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Select Table
+              Enter Number of People
             </label>
             <div className="flex gap-3 flex-wrap">
-              {availableTables.map((table) => (
-                <button
-                  key={table}
-                  className={`px-5 py-2 rounded-lg font-medium transition ${
-                    selectedTable === table
-                      ? "bg-[#FF8C00] text-white"
-                      : "bg-gray-200 hover:bg-gray-300 text-gray-700"
-                  }`}
-                  onClick={() => setSelectedTable(table)}
-                >
-                  Table {table}
-                </button>
-              ))}
+              <input
+                type="number"
+                maxLength={1}
+                className="w-full border border-gray-300 rounded-lg p-2"
+                value={selectedpeople}
+                onChange={(e) => setSelectedPeople(e.target.value)}
+              />
             </div>
           </div>
           <button
@@ -161,7 +171,7 @@ export const Booktable: React.FC = () => {
               !bookingTime ||
               !guestName ||
               !guestPhone ||
-              !selectedTable
+              !selectedpeople
             }
           >
             Book Now

@@ -67,6 +67,17 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
+              to="dishes"
+              spy={true}
+              smooth={true}
+              duration={500}
+              className="hover:text-brightColor transition-all cursor-pointer"
+              onClick={() => navigate("/dishes")}
+            >
+              Dishes
+            </Link>
+
+            <Link
               to="review"
               spy={true}
               smooth={true}
@@ -77,16 +88,6 @@ const Navbar: React.FC = () => {
               Book Table
             </Link>
 
-            <Link
-              to="dishes"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="hover:text-brightColor transition-all cursor-pointer"
-              onClick={() => navigate("/dishes")}
-            >
-              Dishes
-            </Link>
             <Button title="Logout" onClick={handleLogout} />
           </nav>
 

@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import { notification } from "antd";
 import axios from "axios";
+import { url } from "node:inspector";
 import React, { useState } from "react";
 import { BiRestaurant } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
@@ -46,7 +47,7 @@ export const Login = () => {
     if (validateInputs()) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/login",
+          "http://localhost:9090/api/v1/auth/login",
           {
             email: formData.email,
             password: formData.password,
@@ -81,22 +82,20 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex">
+    <div className="w-full h-screen flex">  
       <div className="w-[40%] bg-[#FF8C00] h-full p-8 flex justify-center items-center">
         <div className="h-[90%] p-8 bg-[#F5F5DC]">
           <h1>
-            Please enter few things which will look good , like a letter saying
-            so and so
+          Your Tastebuds Deserve the Best
           </h1>
           <h2 className="mt-20">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt
-            omnis voluptatum voluptas laborum optio. Earum commodi aliquid non
-            labore ipsa perferendis quae. Libero vero numquam eveniet nisi
-            quibusdam cumque dolorum.
+          At Bhoojan, we blend tradition with innovation to bring you the most authentic dining experience. Every dish tells a story, crafted with love and served with care
           </h2>
         </div>
       </div>
-      <div className="w-[60%] bg-white h-full flex justify-center items-center p-8">
+      <div className="w-[60%] bg-white h-full flex justify-center items-center p-8" 
+      style={{backgroundImage:`url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}
+      >
         <div className="flex h-[90%] flex-col w-[70%] justify-center items-center">
           <div className="flex justify-center items-center ">
             <BiRestaurant className="text-[#FF8C00] mr-2" size={32} />
@@ -110,7 +109,7 @@ export const Login = () => {
 
           <TextField
             id="email"
-            label={<span className="text-[#000]">Email</span>}
+            label={<span className="text-white">Email</span>}
             variant="outlined"
             value={formData.email}
             onChange={handleInputChange}
@@ -130,7 +129,7 @@ export const Login = () => {
 
           <TextField
             id="password"
-            label={<span className="text-[#000]">Password</span>}
+            label={<span className="text-white">Password</span>}
             type="password"
             variant="outlined"
             value={formData.password}
@@ -153,7 +152,7 @@ export const Login = () => {
             Don’t have an account yet?{" "}
             <Link
               to="/register"
-              className="underline text-blue-600 hover:text-blue-800"
+              className="underline text-white hover:text-blue-800"
             >
               Register
             </Link>
