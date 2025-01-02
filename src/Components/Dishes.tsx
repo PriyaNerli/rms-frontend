@@ -23,7 +23,7 @@ export const Dishes = () => {
   }, [navigate]);
 
   const { data: response, error } = useSWR(
-    isAuthenticated ? "http://localhost:9090/api/v1/food/getAll" : null,
+    isAuthenticated ? "http://localhost:8080/api/v1/food/getAll" : null,
     fetcher,
     { revalidateOnFocus: false, revalidateOnReconnect: false }
   );
@@ -86,26 +86,32 @@ export const Dishes = () => {
       {isAuthenticated && <Navbar />}
       <div className="mt-2">
         <div className="flex justify-center gap-4 p-4">
-          {["Veg", "Non Veg", "Starters", "Dessert", "Mocktail", "Roti", "Rice"].map(
-            (category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 font-medium rounded ${
-                  selectedCategory === category
-                    ? "bg-[#FF8C00] text-white"
-                    : "bg-gray-200 text-gray-800 hover:bg-[#FF8C40]"
-                }`}
-                onClick={() => {
-                  setSelectedCategory(category);
-                  if (category !== "Starters" && category !== "Rice") {
-                    setSelectedSubcategory(""); // Clear subcategory for other categories
-                  }
-                }}
-              >
-                {category}
-              </button>
-            )
-          )}
+          {[
+            "Veg",
+            "Non Veg",
+            "Starters",
+            "Dessert",
+            "Mocktail",
+            "Roti",
+            "Rice",
+          ].map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-2 font-medium rounded ${
+                selectedCategory === category
+                  ? "bg-[#FF8C00] text-white"
+                  : "bg-gray-200 text-gray-800 hover:bg-[#FF8C40]"
+              }`}
+              onClick={() => {
+                setSelectedCategory(category);
+                if (category !== "Starters" && category !== "Rice") {
+                  setSelectedSubcategory(""); // Clear subcategory for other categories
+                }
+              }}
+            >
+              {category}
+            </button>
+          ))}
         </div>
 
         {/* Subcategory Buttons */}

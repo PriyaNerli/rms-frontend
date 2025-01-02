@@ -47,7 +47,7 @@ export const Login = () => {
     if (validateInputs()) {
       try {
         const response = await axios.post(
-          "http://localhost:9090/api/v1/auth/login",
+          "http://localhost:8080/api/v1/auth/login",
           {
             email: formData.email,
             password: formData.password,
@@ -82,19 +82,24 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex">  
+    <div className="w-full h-screen flex">
       <div className="w-[40%] bg-[#FF8C00] h-full p-8 flex justify-center items-center">
         <div className="h-[90%] p-8 bg-[#F5F5DC]">
-          <h1>
-          Your Tastebuds Deserve the Best
-          </h1>
+          <h1>Your Tastebuds Deserve the Best</h1>
           <h2 className="mt-20">
-          At Bhoojan, we blend tradition with innovation to bring you the most authentic dining experience. Every dish tells a story, crafted with love and served with care
+            At Bhoojan, we blend tradition with innovation to bring you the most
+            authentic dining experience. Every dish tells a story, crafted with
+            love and served with care
           </h2>
         </div>
       </div>
-      <div className="w-[60%] bg-white h-full flex justify-center items-center p-8" 
-      style={{backgroundImage:`url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}
+      <div
+        className="w-[60%] bg-white h-full flex justify-center items-center p-8"
+        // style={{
+        //   backgroundImage: `url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`,
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundSize: "cover",
+        // }}
       >
         <div className="flex h-[90%] flex-col w-[70%] justify-center items-center">
           <div className="flex justify-center items-center ">
@@ -109,7 +114,7 @@ export const Login = () => {
 
           <TextField
             id="email"
-            label={<span className="text-white">Email</span>}
+            label={<span className="text-[#000]">Email</span>}
             variant="outlined"
             value={formData.email}
             onChange={handleInputChange}
@@ -129,7 +134,7 @@ export const Login = () => {
 
           <TextField
             id="password"
-            label={<span className="text-white">Password</span>}
+            label={<span className="text-[#000]">Password</span>}
             type="password"
             variant="outlined"
             value={formData.password}

@@ -60,7 +60,7 @@ export const Register = () => {
     if (validateInputs()) {
       try {
         const response = await axios.post(
-          "http://localhost:9090/api/v1/auth/register",
+          "http://localhost:8080/api/v1/auth/register",
           {
             username: formData.userName,
             email: formData.email,
@@ -99,16 +99,21 @@ export const Register = () => {
     <div className="w-full h-screen flex">
       <div className="w-[40%] bg-[#FF8C00] h-full p-8 flex justify-center items-center">
         <div className="h-[90%] p-8 bg-[#F5F5DC]">
-        <h1>
-          Your Tastebuds Deserve the Best
-          </h1>
+          <h1>Your Tastebuds Deserve the Best</h1>
           <h2 className="mt-20">
-          At Bhoojan, we blend tradition with innovation to bring you the most authentic dining experience. Every dish tells a story, crafted with love and served with care
+            At Bhoojan, we blend tradition with innovation to bring you the most
+            authentic dining experience. Every dish tells a story, crafted with
+            love and served with care
           </h2>
         </div>
       </div>
-      <div className="w-[60%] bg-white h-full flex justify-center items-center p-8"
-      style={{backgroundImage:`url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}
+      <div
+        className="w-[60%] bg-white h-full flex justify-center items-center p-8"
+        style={{
+          backgroundImage: `url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
       >
         <div className="flex h-[90%] flex-col w-[70%] justify-center items-center">
           <div className="flex justify-center items-center ">
@@ -205,10 +210,7 @@ export const Register = () => {
 
           <p className="font-fancy text-[#FF8C00] mt-4">
             Already have an account?{" "}
-            <Link
-              to="/"
-              className="underline text-white hover:text-blue-800"
-            >
+            <Link to="/" className="underline text-white hover:text-blue-800">
               Login
             </Link>
           </p>
