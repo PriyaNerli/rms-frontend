@@ -7,7 +7,7 @@ import { Modal, Button } from "antd";
 
 export const Dishes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Veg");
+  const [selectedCategory, setSelectedCategory] = useState("Starters");
   const [selectedSubcategory, setSelectedSubcategory] = useState("Veg"); // New state for subcategories
   const [cart, setCart] = useState<any>([]);
   const [isModalOpen, setIsModalOpen] = useState<any>(false);
@@ -23,21 +23,26 @@ export const Dishes = () => {
   }, [navigate]);
 
   const { data: response, error } = useSWR(
-    isAuthenticated ? "http://localhost:8080/api/v1/food/getAll" : null,
+    isAuthenticated ? "http://localhost:9090/api/v1/food/getAll" : null,
     fetcher,
     { revalidateOnFocus: false, revalidateOnReconnect: false }
   );
 
+  // const filteredDishes =
+  //   response?.foods?.filter((dish: any) => {
+  //     if (selectedCategory === "Starters" || selectedCategory === "Rice") {
+  //       return (
+  //         dish.category === selectedCategory &&
+  //         dish.subcategory === selectedSubcategory
+  //       );
+  //     }
+  //     return dish.category === selectedCategory;
+  //   }) || [];
+
   const filteredDishes =
-    response?.foods?.filter((dish: any) => {
-      if (selectedCategory === "Starters" || selectedCategory === "Rice") {
-        return (
-          dish.category === selectedCategory &&
-          dish.subcategory === selectedSubcategory
-        );
-      }
-      return dish.category === selectedCategory;
-    }) || [];
+    response?.foods?.filter(
+      (dish: any) => dish.category === selectedCategory
+    ) || [];
 
   const handleIncrement = (_id: any) => {
     setCart((prev: any) => {
@@ -87,13 +92,12 @@ export const Dishes = () => {
       <div className="mt-2">
         <div className="flex justify-center gap-4 p-4">
           {[
+            "Starters",
             "Veg",
             "Non Veg",
-            "Starters",
             "Dessert",
             "Mocktail",
-            "Roti",
-            "Rice",
+            "Main Course",
           ].map((category) => (
             <button
               key={category}
@@ -102,36 +106,12 @@ export const Dishes = () => {
                   ? "bg-[#FF8C00] text-white"
                   : "bg-gray-200 text-gray-800 hover:bg-[#FF8C40]"
               }`}
-              onClick={() => {
-                setSelectedCategory(category);
-                if (category !== "Starters" && category !== "Rice") {
-                  setSelectedSubcategory(""); // Clear subcategory for other categories
-                }
-              }}
+              onClick={() => setSelectedCategory(category)}
             >
               {category}
             </button>
           ))}
         </div>
-
-        {/* Subcategory Buttons */}
-        {(selectedCategory === "Starters" || selectedCategory === "Rice") && (
-          <div className="flex justify-center gap-4 p-4">
-            {["Veg", "Non-Veg"].map((subcategory) => (
-              <button
-                key={subcategory}
-                className={`px-4 py-2 font-medium rounded ${
-                  selectedSubcategory === subcategory
-                    ? "bg-[#FF8C00] text-white"
-                    : "bg-gray-200 text-gray-800 hover:bg-[#FF8C40]"
-                }`}
-                onClick={() => setSelectedSubcategory(subcategory)}
-              >
-                {subcategory}
-              </button>
-            ))}
-          </div>
-        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
           {filteredDishes.length > 0 ? (

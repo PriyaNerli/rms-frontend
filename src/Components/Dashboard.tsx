@@ -58,27 +58,33 @@ export const Dashboard = () => {
               Booked Tables
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bookedTables?.map((table: any, index: number) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-lg shadow-md border border-gray-200"
-                >
-                  <div className="flex items-center mb-4">
-                    <div className="bg-gray-300 w-12 h-12 rounded-full flex justify-center items-center text-lg font-bold">
-                      {table.tableId}
+              {bookedTables.length > 0 ? (
+                bookedTables?.map((table: any, index: number) => (
+                  <div
+                    key={index}
+                    className="bg-white p-6 rounded-lg shadow-md border border-gray-200"
+                  >
+                    <div className="flex items-center mb-4">
+                      <div className="bg-gray-300 w-12 h-12 rounded-full flex justify-center items-center text-lg font-bold">
+                        {table.tableId}
+                      </div>
+                      <h3 className="ml-4 text-xl font-semibold">
+                        Table {table.tableId}
+                      </h3>
                     </div>
-                    <h3 className="ml-4 text-xl font-semibold">
-                      Table {table.tableId}
-                    </h3>
+                    <p className="text-gray-600">
+                      <strong>Name:</strong> {table.guestName}
+                    </p>
+                    <p className="text-gray-600">
+                      <strong>Special Request:</strong> {table.specialRequest}
+                    </p>
                   </div>
-                  <p className="text-gray-600">
-                    <strong>Name:</strong> {table.guestName}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Special Request:</strong> {table.specialRequest}
-                  </p>
+                ))
+              ) : (
+                <div className="text-gray-700 text-center col-span-full flex justify-start">
+                  No tables booked yet.
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -99,7 +105,7 @@ export const Dashboard = () => {
                 {REVIEWS.map((review: any, index: number) => (
                   <div
                     key={index}
-                    className="flex justify-center items-center bg-white p-6 rounded-lg shadow-md"
+                    className="flex justify-center items-center bg-yellow p-6 rounded-lg shadow-md"
                   >
                     {/* <img
                       src="https://cdn-icons-png.flaticon.com/512/1882/1882606.png"

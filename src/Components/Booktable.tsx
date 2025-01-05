@@ -65,7 +65,7 @@ export const Booktable: React.FC = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/bookings/create",
+        "http://localhost:9090/api/v1/bookings/create",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export const Booktable: React.FC = () => {
     const fetchBookings = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/v1/bookings/all"
+          "http://localhost:9090/api/v1/bookings/all"
         );
         console.log("response ---", response);
         const data = await response.json();
@@ -185,7 +185,7 @@ export const Booktable: React.FC = () => {
             </label>
             <div className="flex gap-3 flex-wrap">
               <input
-                type="number"
+                type="text"
                 maxLength={1}
                 className="w-full border border-gray-300 rounded-lg p-2"
                 value={selectedpeople}

@@ -47,7 +47,7 @@ export const Login = () => {
     if (validateInputs()) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/login",
+          "http://localhost:9090/api/v1/auth/login",
           {
             email: formData.email,
             password: formData.password,
@@ -85,56 +85,103 @@ export const Login = () => {
     <div className="w-full h-screen flex">
       <div className="w-[40%] bg-[#FF8C00] h-full p-8 flex justify-center items-center">
         <div className="h-[90%] p-8 bg-[#F5F5DC]">
-          <h1>Your Tastebuds Deserve the Best</h1>
-          <h2 className="mt-20">
-            At Bhoojan, we blend tradition with innovation to bring you the most
-            authentic dining experience. Every dish tells a story, crafted with
-            love and served with care
-          </h2>
+          <div className="welcome-section">
+            <h1 className="main-heading">
+              <strong>Welcome to Bhoojan</strong> – Where Every Meal is a Celebration!
+            </h1>
+
+            <p className="intro-text">
+              Your culinary journey begins here. At Bhoojan, we believe that
+              food is more than just sustenance 
+              <h2 className="section-title">-it’s an experience, a memory,
+              and a story waiting to be told.</h2>
+            </p>
+
+            <section className="why-choose-us">
+              <h2 className="section-title"><strong>Why Choose Bhoojan?</strong></h2>
+              <ul className="benefits-list">
+                <li>
+                  <span className="emoji">🌟</span>
+                  <strong>Authenticity in Every Bite:</strong> We honor
+                  tradition by preserving the time-tested recipes of our
+                  ancestors while adding a touch of modern creativity to delight
+                  your palate.
+                </li>
+                <li>
+                  <span className="emoji">🍴</span>
+                  <strong>Crafted with Love:</strong> From the freshest
+                  ingredients to the final plating, every step is infused with
+                  passion and dedication.
+                </li>
+                <li>
+                  <span className="emoji">🍹</span>
+                  <strong>A Symphony of Flavors:</strong> Discover a menu that
+                  caters to every craving, blending diverse tastes into a
+                  harmonious dining experience.
+                </li>
+              </ul>
+            </section>
+
+            <section className="closing-message">
+              <h2 className="highlighted-text">
+                At Bhoojan, we blend tradition with innovation to bring you the
+                most authentic dining experience. Every dish tells a story,
+                crafted with love and served with care.
+              </h2>
+            </section>
+          </div>
         </div>
       </div>
       <div
         className="w-[60%] bg-white h-full flex justify-center items-center p-8"
-        // style={{
-        //   backgroundImage: `url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        // }}
+        style={{
+          backgroundImage: `url('https://inrestoblog.s3.ap-south-1.amazonaws.com/types1.png')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
       >
         <div className="flex h-[90%] flex-col w-[70%] justify-center items-center">
           <div className="flex justify-center items-center ">
             <BiRestaurant className="text-[#FF8C00] mr-2" size={32} />
-            <h2 className="font-fancy text-4xl text-[#FF8C00] tracking-wide mb-4">
+            <h2 className="font-fancy text-5xl text-[#FF8C00] tracking-wide mb-4">
               Bhoojan
             </h2>
           </div>
-          <p className=" font-fancy text-[#FF8C00] text-xl font-semibold mb-4 decoration-dashed">
+          <p className=" font-fancy text-[#FF8C00] text-3xl font-semibold mb-4 decoration-dashed">
             Welcome!
           </p>
 
           <TextField
-            id="email"
-            label={<span className="text-[#000]">Email</span>}
-            variant="outlined"
-            value={formData.email}
-            onChange={handleInputChange}
-            error={!!errors.email}
-            helperText={errors.email}
-            className="w-[70%] m-10"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#FF8C00" },
-                "&:hover fieldset": { borderColor: "#FF8C00" },
-                "&.Mui-focused fieldset": { borderColor: "#FF8C00" },
-              },
-              marginBottom: "12px",
-              width: "70%",
-            }}
-          />
+  id="email"
+  label={<span className="text-[#fff]">Email</span>}
+  variant="outlined"
+  value={formData.email}
+  onChange={handleInputChange}
+  error={!!errors.email}
+  helperText={errors.email}
+  className="w-[70%] m-10"
+  sx={{
+    "& .MuiOutlinedInput-root": {
+      color: "#fff", // Makes the input text white
+      "& fieldset": { borderColor: "#FF8C00" }, // Default border color
+      "&:hover fieldset": { borderColor: "#FF8C00" }, // Hover border color
+      "&.Mui-focused fieldset": { borderColor: "#FF8C00" }, // Focus border color
+    },
+    "& .MuiInputLabel-root": {
+      color: "#fff", // Makes the label text white
+    },
+    "& .MuiFormHelperText-root": {
+      color: "#fff", // Makes the helper text white
+    },
+    marginBottom: "12px",
+    width: "70%",
+  }}
+/>
+
 
           <TextField
             id="password"
-            label={<span className="text-[#000]">Password</span>}
+            label={<span className="text-[#fff]">Password</span>}
             type="password"
             variant="outlined"
             value={formData.password}
@@ -142,11 +189,18 @@ export const Login = () => {
             error={!!errors.password}
             helperText={errors.password}
             className="w-[70%] m-10"
-            sx={{
+            sx={{ 
               "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#FF8C00" },
-                "&:hover fieldset": { borderColor: "#FF8C00" },
-                "&.Mui-focused fieldset": { borderColor: "#FF8C00" },
+                color: "#fff", // Makes the input text white
+                "& fieldset": { borderColor: "#FF8C00" }, // Default border color
+                "&:hover fieldset": { borderColor: "#FF8C00" }, // Hover border color
+                "&.Mui-focused fieldset": { borderColor: "#FF8C00" }, // Focus border color
+              },
+              "& .MuiInputLabel-root": {
+                color: "#fff", // Makes the label text white
+              },
+              "& .MuiFormHelperText-root": {
+                color: "#fff", // Makes the helper text white
               },
               marginBottom: "12px",
               width: "70%",

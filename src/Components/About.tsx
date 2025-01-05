@@ -84,6 +84,15 @@ export const About = () => {
 
           <div className="mt-12 text-center">
             <h2 className="text-3xl font-semibold text-gray-800">
+             Our Location
+            </h2>
+            <p className="text-lg text-gray-600 mt-4">
+            Bhooja, 123 Gourmet Street, Foodie Town, Tastyville State 45678<br/>
+             Phone: 7483201588 Email: info@bhooja.com
+            </p>
+
+          <div className="mt-12 text-center">
+            <h2 className="text-3xl font-semibold text-gray-800">
               Make Your Reservation
             </h2>
             <p className="text-lg text-gray-600 mt-4">
@@ -98,6 +107,7 @@ export const About = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
