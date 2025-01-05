@@ -22,7 +22,7 @@ export const Dashboard = () => {
 
   const fetchBookedTables = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/v1/bookings/all");
+      const response = await fetch("http://localhost:9090/api/v1/bookings/all");
       const data = await response.json();
 
       if (response.ok) {
