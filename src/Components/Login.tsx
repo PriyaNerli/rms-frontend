@@ -47,7 +47,8 @@ export const Login = () => {
     if (validateInputs()) {
       try {
         const response = await axios.post(
-          "http://localhost:9090/api/v1/auth/login",
+          `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+          // "http://localhost:9090/api/v1/auth/login",
           {
             email: formData.email,
             password: formData.password,
@@ -87,44 +88,44 @@ export const Login = () => {
         <div className="h-[90%] p-8 bg-[#F5F5DC]">
           <div className="welcome-section">
             <h1 className="main-heading">
-              <strong>Welcome to Bhoojan</strong> – Where Every Meal is a Celebration!
+              <strong>Welcome to Bhoojan</strong><br/> – Where Every Meal is a Celebration!
             </h1>
 
             <p className="intro-text">
               Your culinary journey begins here. At Bhoojan, we believe that
-              food is more than just sustenance 
-              <h2 className="section-title">-it’s an experience, a memory,
+              food is more than just sustenance <br/>
+              <h2 className="section-title"> - it’s an experience, a memory,
               and a story waiting to be told.</h2>
             </p>
 
-            <section className="why-choose-us">
+            <section className="mt-4">
               <h2 className="section-title"><strong>Why Choose Bhoojan?</strong></h2>
               <ul className="benefits-list">
-                <li>
+                <li className="mt-2">
                   <span className="emoji">🌟</span>
-                  <strong>Authenticity in Every Bite:</strong> We honor
+                  <strong>Authenticity in Every Bite:</strong><br/> - We honor
                   tradition by preserving the time-tested recipes of our
                   ancestors while adding a touch of modern creativity to delight
                   your palate.
                 </li>
-                <li>
+                <li className="mt-2">
                   <span className="emoji">🍴</span>
-                  <strong>Crafted with Love:</strong> From the freshest
+                  <strong>Crafted with Love:</strong> <br/>  - From the freshest
                   ingredients to the final plating, every step is infused with
                   passion and dedication.
                 </li>
-                <li>
+                <li className="mt-2">
                   <span className="emoji">🍹</span>
-                  <strong>A Symphony of Flavors:</strong> Discover a menu that
+                  <strong>A Symphony of Flavors:</strong> <br/> - Discover a menu that
                   caters to every craving, blending diverse tastes into a
                   harmonious dining experience.
                 </li>
               </ul>
             </section>
 
-            <section className="closing-message">
+            <section className="mt-4">
               <h2 className="highlighted-text">
-                At Bhoojan, we blend tradition with innovation to bring you the
+              -  At Bhoojan, we blend tradition with innovation to bring you the
                 most authentic dining experience. Every dish tells a story,
                 crafted with love and served with care.
               </h2>

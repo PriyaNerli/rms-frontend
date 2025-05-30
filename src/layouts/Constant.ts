@@ -1,3 +1,5 @@
+import { Reviews } from "@mui/icons-material";
+
 export const REVIEWS = [
   {
     reviewer: "Vijay Sawant",
@@ -22,6 +24,10 @@ export const REVIEWS = [
   {
     reviewer: "Vikram Patil",
     review: "A perfect place for a weekend dinner with friends.",
+  },
+  {
+    reviewer: "Rahul Gousekar",
+    Review: "Warm, Inviting, and perfect for any occasion."
   },
   {
     reviewer: "Ganesh Gejji",
